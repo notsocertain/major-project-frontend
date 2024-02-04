@@ -93,10 +93,18 @@
         alert('Please upload a file before submitting.');
         e.preventDefault(); // Prevent the form from submitting
     } else {
+        // If you're handling the form submission via JavaScript and AJAX, 
+        // you might submit the form data here and then navigate on success.
+        // For demonstration, I'm showing an alert and then navigating directly.
+        
         alert('File is uploaded, now submitting...');
-        // If you're handling the form submission via JavaScript, you'd continue your logic here.
-        // If the form is meant to be submitted normally to a server, you don't need to do anything else.
+        
+        // Assuming the file upload and any associated checks are handled synchronously
+        // or you're not doing AJAX submission:
+        // Navigate to checked.html after showing the upload confirmation.
+        window.location.href = 'checked.html';
     }
 });
+
 
     </script>
