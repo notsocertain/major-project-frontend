@@ -12,7 +12,7 @@ a list of synonyms for the word -->
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex flex-col h-full">
+<body class="bg-gray-100 flex flex-col min-h-screen">
     <header class="bg-white shadow py-4">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
             <h1 class="text-xl font-semibold text-gray-900"> <a href="index.html">Plagiarism Detector</a> </h1>
@@ -45,53 +45,52 @@ a list of synonyms for the word -->
 </body>
 </html>
 <script>
-
-document.getElementById('posForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const sentence = document.getElementById('wordInput').value.trim();
-
-    // Placeholder: Simulate fetching words and POS tags for the sentence
-    console.log(`Find POS tags for: ${sentence}`);
-
-    // Simulated response for demonstration purposes
-    const wordsWithPosTags = [
-        { word: "Example", pos: "Noun" },
-        { word: "beautifully", pos: "Adverb" },
-        { word: "runs", pos: "Verb" }
-    ];
-
-    // Start building the table HTML string
-    let tableHtml = `
-        <div class="overflow-x-auto">
-            <table class="table-auto w-full mt-4 shadow-lg bg-white">
-                <thead class="bg-blue-500 text-white">
-                    <tr>
-                        <th class="px-4 py-2">Word</th>
-                        <th class="px-4 py-2">POS Tag</th>
-                    </tr>
-                </thead>
-                <tbody class="text-gray-700">`;
-
-    // Populate table rows with words and their POS tags
-    wordsWithPosTags.forEach((item, index) => {
-        const rowClass = index % 2 === 0 ? 'bg-gray-100' : 'bg-white';
-        tableHtml += `
-            <tr class="${rowClass}">
-                <td class="border px-4 py-2">${item.word}</td>
-                <td class="border px-4 py-2">${item.pos}</td>
-            </tr>`;
+    document.getElementById('posForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const sentence = document.getElementById('wordInput').value.trim();
+        
+        // Simulating the splitting of the input sentence into words
+        // Note: This simplistic split method does not account for punctuation.
+        const words = sentence.split(/\s+/);
+    
+        // Placeholder for processing each word to assign a POS tag
+        // In a real application, you would use an NLP library or an API call here.
+        const wordsWithPosTags = words.map(word => {
+            // Simulate POS tagging
+            // This is where you'd dynamically determine the POS tag based on the word
+            // For demonstration, assign random POS tags (just as an example)
+            const posTags = ["Noun", "Verb", "Adjective", "Adverb"];
+            const pos = posTags[Math.floor(Math.random() * posTags.length)]; // Randomly select a POS tag
+            return { word: word, pos: pos };
+        });
+    
+        // Generate the HTML for the table
+        let tableHtml = `
+            <div class="overflow-x-auto">
+                <table class="table-auto w-full mt-4 shadow-lg bg-white">
+                    <thead class="bg-blue-500 text-white">
+                        <tr>
+                            <th class="px-4 py-2">Word</th>
+                            <th class="px-4 py-2">POS Tag</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">`;
+    
+        // Populate table rows with words and their POS tags
+        wordsWithPosTags.forEach((item, index) => {
+            const rowClass = index % 2 === 0 ? 'bg-gray-100' : 'bg-white';
+            tableHtml += `
+                <tr class="${rowClass}">
+                    <td class="border px-4 py-2">${item.word}</td>
+                    <td class="border px-4 py-2">${item.pos}</td>
+                </tr>`;
+        });
+    
+        // Close the table HTML string
+        tableHtml += `</tbody></table></div>`;
+    
+        // Update the UI with the constructed table
+        document.getElementById('synonymResults').innerHTML = tableHtml;
     });
-
-    // Close the table HTML string
-    tableHtml += `
-                </tbody>
-            </table>
-        </div>`;
-
-    // Update the UI with the constructed table
-    document.getElementById('synonymResults').innerHTML = tableHtml;
-});
-</script>
-
-
-</script>
+    </script>
+    
