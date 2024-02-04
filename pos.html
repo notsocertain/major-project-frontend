@@ -45,12 +45,53 @@ a list of synonyms for the word -->
 </body>
 </html>
 <script>
-    document.getElementById('synonymForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const word = document.getElementById('wordInput').value.trim();
-        // Placeholder for where you'd make an API call or search for synonyms
-        console.log(`Find synonyms for: ${word}`);
-        // Example: Update UI with "fake" synonyms (replace this with actual API call result)
-        document.getElementById('synonymResults').innerHTML = `<p class="text-lg font-semibold">Synonyms for "${word}":</p><ul class="list-disc list-inside"><li>Synonym 1</li><li>Synonym 2</li><li>Synonym 3</li></ul>`;
+
+document.getElementById('posForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const sentence = document.getElementById('wordInput').value.trim();
+
+    // Placeholder: Simulate fetching words and POS tags for the sentence
+    console.log(`Find POS tags for: ${sentence}`);
+
+    // Simulated response for demonstration purposes
+    const wordsWithPosTags = [
+        { word: "Example", pos: "Noun" },
+        { word: "beautifully", pos: "Adverb" },
+        { word: "runs", pos: "Verb" }
+    ];
+
+    // Start building the table HTML string
+    let tableHtml = `
+        <div class="overflow-x-auto">
+            <table class="table-auto w-full mt-4 shadow-lg bg-white">
+                <thead class="bg-blue-500 text-white">
+                    <tr>
+                        <th class="px-4 py-2">Word</th>
+                        <th class="px-4 py-2">POS Tag</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-700">`;
+
+    // Populate table rows with words and their POS tags
+    wordsWithPosTags.forEach((item, index) => {
+        const rowClass = index % 2 === 0 ? 'bg-gray-100' : 'bg-white';
+        tableHtml += `
+            <tr class="${rowClass}">
+                <td class="border px-4 py-2">${item.word}</td>
+                <td class="border px-4 py-2">${item.pos}</td>
+            </tr>`;
     });
+
+    // Close the table HTML string
+    tableHtml += `
+                </tbody>
+            </table>
+        </div>`;
+
+    // Update the UI with the constructed table
+    document.getElementById('synonymResults').innerHTML = tableHtml;
+});
+</script>
+
+
 </script>
